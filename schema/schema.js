@@ -209,13 +209,15 @@ const mutation = new GraphQLObjectType({
         name: { type: new GraphQLNonNull(GraphQLString) },
         email: { type: new GraphQLNonNull(GraphQLString) },
         body: { type: new GraphQLNonNull(GraphQLString) },
+        postId: { type: new GraphQLNonNull(GraphQLString) },
       },
-      resolve(parentValue, { id, name, email, body }) {
+      resolve(parentValue, { id, name, email, body, postId }) {
         return axios.post(`http://localhost:3000/comments`, {
           id,
           name,
           email,
           body,
+          postId,
         });
       },
     },

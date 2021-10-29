@@ -1,6 +1,8 @@
 const express = require("express");
 const { graphqlHTTP } = require("express-graphql");
 const schema = require("./schema/schema");
+const expressPlayground =
+  require("graphql-playground-middleware-express").default;
 
 const app = express();
 
@@ -12,8 +14,11 @@ app.use(
   })
 );
 
-app.listen(4000, () => {
+app.get("/playground", expressPlayground({ endpoint: "/graphql" }));
+const port = process.env.PORT || "4000";
+
+app.listen(port, () => {
   console.log(
-    `Now browse to localhost:4000/graphql and please run *npm run json:server* to start database`
+    `Now browse to localhost:${port}/playground and please run *npm run json:server* to start database`
   );
 });
