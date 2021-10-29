@@ -77,6 +77,15 @@ const CommentType = new GraphQLObjectType({
           .then((response) => response.data);
       },
     },
+    replies: {
+      type: new GraphQLList(ReplyType),
+      resolve(parentValue, args) {
+        console.log(parentValue);
+        return axios
+          .get(`http://localhost:3000/replies?commentId=${parentValue.id}`)
+          .then((response) => response.data);
+      },
+    },
   }),
 });
 
